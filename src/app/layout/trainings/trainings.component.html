@@ -1,0 +1,41 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Trainings List'" [icon]="'fa-table'"></app-page-header>
+            <div class="card mb-6">
+                <div class="card-header">
+                    Trainings
+                </div>
+                <div class="card-body table">
+                    <table class="table">
+                    <thead></thead>
+                    <tr>
+                        <th>ID</th><th>Room Name</th><th>Start Time</th><th>End Time</th><th>Description</th><th>Employee</th><th>Approval</th>
+                    </tr>
+                    <tbody>
+                        <tr *ngFor="let training of trainings">
+                            <td>{{training.requestId}}</td>
+                            <td>{{training.roomId.roomName}}</td>
+                            <td>{{training.startDate}}</td>
+                            <td>{{training.endDate}}</td>
+                            <td>{{training.trainingDesc}}</td>
+                            <td>{{training.empid.f_name}} {{training.empid.l_name}}</td>
+                            <td>
+                                <label *ngIf="loginService.isAdmin() && (training.approve=='' || training.approve==null)">
+                                    <button class="btn btn-success fa fa-check-circle fa-x5" (click)="approveTrainings(training)"></button>
+                                    &nbsp;
+                                    <button class="btn btn-danger fa fa-window-close fa-x5" (click)="denyTrainings(training)"></button>
+                                </label>
+                                <label *ngIf="!loginService.isAdmin() && (training.approve=='' || training.approve==null)"
+                                    class="fa fa-warning fa-x5" style="color:gold">&nbsp; Pending</label>
+                                <label *ngIf="training.approve=='yes'"
+                                class="fa fa-check-circle fa-x5" style="color:green">&nbsp; Approved</label>
+                                <label *ngIf="training.approve=='no'"
+                                class="fa fa-window-close fa-x5" style="color:red">&nbsp; Denied</label>
+                            </td>
+                            <td *ngIf="loginService.isAdmin()"><button class="btn btn-danger" (click)="deleteTrainings(training)">
+                                Delete Training</button></td>
+                        </tr>
+                    </tbody>
+                    </table>
+                    </div>
+             </div>
+</div>

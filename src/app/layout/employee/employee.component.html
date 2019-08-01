@@ -1,0 +1,23 @@
+<div [@routerTransition]>
+        <app-page-header [heading]="'Employees List'" [icon]="'fa-fa users'"></app-page-header>
+            <div class="card mb-6" *ngIf="loginService.isAdmin()">
+                    <div class="card-header">Employees</div>
+    <table class="card-body table">
+        <thead></thead>
+        <tr>
+            <th>ID</th><th>Full Name</th><th>Email</th><th>Contact</th><th>Department</th>
+        </tr>
+        <tbody>
+            <tr *ngFor="let emp of employees">
+                <td scope="row">{{emp.empid}}</td>
+                <td>{{emp.f_name}} {{emp.l_name}}</td>
+                <td>{{emp.emailid}}</td>
+                <td>{{emp.contacno}}</td>
+                <td>{{emp.dept_id.deptname}}</td>
+                <td *ngIf="loginService.isAdmin()"><button class="btn btn-danger" (click)="deleteEmp(emp)">
+                    Delete Employee</button></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>

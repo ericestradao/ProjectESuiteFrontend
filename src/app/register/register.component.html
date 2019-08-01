@@ -1,0 +1,64 @@
+<div class="login-page" [@routerTransition]>
+        <div class="row justify-content-md-center">
+            <div class="col-md-4">
+            <img class="user-avatar" src="assets/images/logo.png" width="150px" />
+        <h1 class="text-center">Register</h1>
+        
+        <form [formGroup]="registerForm" action="" (ngSubmit)="registerForm.valid && onRegisterSubmit()" novalidate>
+    
+            <div class="form-content">
+                    <div class="form-group">
+                <input [(ngModel)]="emp.f_name" placeholder="Enter your First Name" 
+                name="f_name" id="f_name" matInput formControlName="f_name" class="form-control input-underline input-lg">
+            </div>
+            </div>
+    
+            <div class="form-content">
+                    <div class="form-group">
+                <input [(ngModel)]="emp.l_name" placeholder="Enter your Last Name" name="l_name"
+                    id="l_name" matInput formControlName="l_name"  class="form-control input-underline input-lg">
+            </div>
+            </div>
+    
+            <div class="form-content">
+                <div class="form-group">
+                <input [(ngModel)]="emp.username" placeholder="Enter your e-mail" name="username"
+                    id="username" matInput formControlName="username" class="form-control input-underline input-lg">
+                </div>
+            </div>
+
+            <div class="form-content">
+                    <div class="form-group">
+                    <input [(ngModel)]="emp.password" placeholder="Password" name="password" type="password"
+                        id="password" matInput formControlName="password"  class="form-control input-underline input-lg">
+                    </div>
+                </div>
+
+            <div class="form-content">
+                    <div class="form-group">
+                <input [(ngModel)]="emp.contacno" placeholder="Enter contact number" name="contacno" value=""
+                    id="contacno" matInput formControlName="contacno" class="form-control input-underline input-lg">
+                    </div>
+            </div>
+            
+            <div class="form-content">
+                    <div class="form-group">
+                <select [(ngModel)]="emp.deptname" name="deptname" id="deptname" class="form-control input-underline input-lg"
+                [ngModelOptions]="{standalone: true}">
+                <option selected="selected" disabled>Choose a department...</option>
+                <option *ngFor="let dept of department" [ngValue]="dept.deptname">{{dept.deptname}}</option>
+    
+              </select>
+            </div>
+            </div>
+    
+        
+            <button class="btn rounded-btn" (click)="createEmp()" [disabled]="!registerForm.valid"
+            mat-button type="submit">Register</button> &nbsp;
+            <button class="btn rounded-btn" [routerLink]="['/login']" mat-button type="submit">Login</button>
+            
+            
+        </form>
+    </div>
+</div>
+</div>

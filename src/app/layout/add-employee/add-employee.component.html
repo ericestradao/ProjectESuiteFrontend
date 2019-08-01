@@ -1,0 +1,63 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Create Employee'" [icon]="'fa-bar-chart-o'"></app-page-header>
+    <div class="col-xl-12 text-xs-center">
+        <form [formGroup]="registerForm" action="" (ngSubmit)="registerForm.valid && onRegisterSubmit()" novalidate>
+
+            <div class="form-container">
+                <label for="f_name">First Name</label>
+                <mat-form-field>
+                <input [(ngModel)]="emp.f_name" placeholder="Enter your First Name" 
+                name="f_name" id="f_name" matInput formControlName="f_name">
+                </mat-form-field>
+            </div>
+    
+            <div class="form-container">
+                <label for="l_name">Last Name</label>
+                <mat-form-field>
+                <input [(ngModel)]="emp.l_name" placeholder="Enter your Last Name" name="l_name"
+                    id="l_name" matInput formControlName="l_name">
+                </mat-form-field>
+            </div>
+    
+            <div class="form-container">
+                <label for="username">E-mail</label>
+                <mat-form-field>
+                <input [(ngModel)]="emp.username" placeholder="Enter your e-mail" name="username"
+                    id="username" matInput formControlName="username">
+                </mat-form-field>
+            </div>
+
+            <div class="form-container">
+                <label for="password">Password</label>
+                <mat-form-field>
+                <input [(ngModel)]="emp.password" placeholder="Password" name="password" type="password"
+                    id="password" matInput formControlName="password">
+                </mat-form-field>
+            </div>
+
+            <div class="form-container">
+                <label for="contacno">Contact Number</label>
+                <mat-form-field>
+                <input [(ngModel)]="emp.contacno" placeholder="Enter your contact number" name="contacno"
+                    id="contacno" matInput formControlName="contacno" value="">
+                </mat-form-field>
+            </div>
+            
+            <div class="form-container">
+                    <label for="deptname">Department</label>
+      
+                <select [(ngModel)]="emp.deptname" name="deptname" id="deptname" class="form-control"
+                [ngModelOptions]="{standalone: true}">
+                <option selected="selected" disabled>Choose a department...</option>
+                <option *ngFor="let dept of department" [ngValue]="dept.deptname">{{dept.deptname}}</option>
+    
+              </select>
+            </div>
+    
+            <br>
+            <button class="mat-raised-button mat-primary" (click)="createEmp()" [disabled]="!registerForm.valid"
+            mat-button type="submit">Create Employee</button>
+            
+        </form>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<div>
+    <app-page-header [heading]="'Meetings'" [icon]="'fa-th-list'"></app-page-header>
+    <div class="card mb-6">
+        <div class="card-header">Meetings</div>
+        <table class="card-body table">
+        <thead></thead>
+        <tr>
+            <th>ID</th><th>Room Name</th><th>Start Time</th><th>End Time</th><th>Description</th><th>Employee</th><th>Approval</th>
+        </tr>
+        <tbody>
+            <tr *ngFor="let meeting of meetings">
+                <td>{{meeting.requestId}}</td>
+                <td>{{meeting.roomId.meetingRoomName}}</td>
+                <td>{{meeting.startTime | date: 'M/d/yy h:mm a'}}</td>
+                <td>{{meeting.endTime | date: 'M/d/yy h:mm a'}}</td>
+                <td>{{meeting.meetingDesc}}</td>
+                <td>{{meeting.empid.f_name}} {{meeting.empid.l_name}}</td>
+                <td>
+                    <label *ngIf="loginService.isAdmin() && (meeting.approve=='' || meeting.approve==null)">
+                        <button class="btn btn-success fa fa-check-circle fa-x5" (click)="approveMeetings(meeting)"></button>
+                        &nbsp;
+                        <button class="btn btn-danger fa fa-window-close fa-x5" (click)="denyMeetings(meeting)"></button>
+                    </label>
+                    <label *ngIf="!loginService.isAdmin() && (meeting.approve=='' || meeting.approve==null)"
+                        class="fa fa-warning fa-x5" style="color:gold">&nbsp; Pending</label>
+                    <label *ngIf="meeting.approve=='yes'"
+                    class="fa fa-check-circle fa-x5" style="color:green">&nbsp; Approved</label>
+                    <label *ngIf="meeting.approve=='no'"
+                    class="fa fa-window-close fa-x5" style="color:red">&nbsp; Denied</label>
+                </td>
+                <td *ngIf="loginService.isAdmin()"><button class="btn btn-danger" (click)="deleteMeetings(meeting)">
+                    Delete Meeting</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

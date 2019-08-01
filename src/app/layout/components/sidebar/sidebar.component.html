@@ -1,0 +1,210 @@
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
+    <div class="list-group">
+        <div class="nested-menu"  *ngIf="loginService.isAdmin()">
+            <a class="list-group-item" (click)="addExpandClass('emps')">
+                <i class="fa fa-user-circle-o"></i>&nbsp;
+                <span>Employees</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'emps'">
+                <ul class="submenu">
+                    <li>
+                        <a routerLink="/employee" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-fw fa-users"></i>&nbsp;
+                            <span>Employees List</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/addEmp']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-fw fa-user"></i>&nbsp;
+                            <span>Create Employee</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+
+        <a *ngIf="loginService.isAdmin()" [routerLink]="['/addDepartment']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-building"></i>&nbsp;
+            <span>Departments</span>
+        </a>
+
+        <a *ngIf="!loginService.isAdmin()" [routerLink]="['/tasks']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-tasks"></i>&nbsp;
+            <span>Tasks</span>
+        </a>
+
+        <div *ngIf="loginService.isAdmin()" class="nested-menu">
+                <a class="list-group-item" (click)="addExpandClass('tasks')">
+                    <i class="fa fa-tasks"></i>&nbsp;
+                    <span>Tasks</span>
+                </a>
+                <li class="nested" [class.expand]="showMenu === 'tasks'">
+                    <ul class="submenu">
+                        <li>
+                            <a routerLink="/tasks" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                                <i class="fa fa-fw fa-address-book"></i>&nbsp;
+                                <span>Tasks List</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/addTask']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                                <i class="fa fa-fw fa-address-book-o"></i>&nbsp;
+                                <span>Create Task</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </div>
+
+            <div class="nested-menu">
+                    <a class="list-group-item" (click)="addExpandClass('leaves')">
+                        <i class="fa fa-heartbeat"></i>&nbsp;
+                        <span>Leave Request</span>
+                    </a>
+                    <li class="nested" [class.expand]="showMenu === 'leaves'">
+                        <ul class="submenu">
+                            <li>
+                                <a routerLink="/leaves" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                                    <i class="fa fa-fw fa-hospital-o"></i>&nbsp;
+                                    <span>Request List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a [routerLink]="['/addLeave']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                                    <i class="fa fa-fw fa-user-md"></i>&nbsp;
+                                    <span>Create Request</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </div>
+                <div class="nested-menu">
+                        <a class="list-group-item" (click)="addExpandClass('meets')">
+                            <i class="fa fa-coffee"></i>&nbsp;
+                            <span>Meetings</span>
+                        </a>
+                        <li class="nested" [class.expand]="showMenu === 'meets'">
+                            <ul class="submenu">
+                                <li>
+                                    <a routerLink="/meetings" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                                        <i class="fa fa-fw fa-fax"></i>&nbsp;
+                                        <span>Meetings List</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a [routerLink]="['/addMeeting']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                                        <i class="fa fa-fw fa-vcard"></i>&nbsp;
+                                        <span>Create Meeting</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+
+                    <div class="nested-menu">
+                            <a class="list-group-item" (click)="addExpandClass('trains')">
+                                <i class="fa fa-bar-chart"></i>&nbsp;
+                                <span>Trainings</span>
+                            </a>
+                            <li class="nested" [class.expand]="showMenu === 'trains'">
+                                <ul class="submenu">
+                                    <li>
+                                        <a routerLink="/trainings" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                                            <i class="fa fa-fw fa-area-chart"></i>&nbsp;
+                                            <span>Training List</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a [routerLink]="['/addTraining']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                                            <i class="fa fa-fw fa-pie-chart"></i>&nbsp;
+                                            <span>Create Training</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </div>
+
+        <div class="header-fields">
+            <a (click)="rltAndLtr()" class="list-group-item">
+                <span><i class="fa fa-arrows-h"></i>&nbsp; RTL/LTR</span>
+            </a>
+            <div class="nested-menu">
+                <a class="list-group-item" (click)="addExpandClass('languages')">
+                    <span><i class="fa fa-language"></i>&nbsp; Language <b class="caret"></b></span>
+                </a>
+                <li class="nested" [class.expand]="showMenu === 'languages'">
+                    <ul class="submenu">
+                        <li>
+                            <a href="javascript:void(0)" (click)="changeLang('en')">
+                                English
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" (click)="changeLang('fr')">
+                                French
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" (click)="changeLang('ur')">
+                                Urdu
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" (click)="changeLang('es')">
+                                Spanish
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" (click)="changeLang('it')">
+                                Italian
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" (click)="changeLang('fa')">
+                                Farsi
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" (click)="changeLang('de')">
+                                German
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </div>
+            <div class="nested-menu">
+                <a class="list-group-item" (click)="addExpandClass('profile')">
+                    <span><i class="fa fa-user"></i>&nbsp; John Smith</span>
+                </a>
+                <li class="nested" [class.expand]="showMenu === 'profile'">
+                    <ul class="submenu">
+                        <li>
+                            <a href="javascript:void(0)">
+                                <span><i class="fa fa-fw fa-user"></i> Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <span><i class="fa fa-fw fa-envelope"></i> Inbox</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <span><i class="fa fa-fw fa-gear"></i> Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/login']" (click)="onLoggedout()">
+                                <span><i class="fa fa-fw fa-power-off"></i> Log Out</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </div>
+        </div>
+    </div>
+    <div class="toggle-button" [ngClass]="{collapsed: collapsed}" (click)="toggleCollapsed()">
+        <i class="fa fa-fw fa-angle-double-{{collapsed?'right':'left'}}"></i>&nbsp;
+        <span>Collapse Sidebar</span>
+    </div>
+</nav>

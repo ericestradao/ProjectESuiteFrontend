@@ -1,0 +1,29 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Tasks List'" [icon]="'fa-table'"></app-page-header>
+
+                
+            <div class="card mb-6">
+                <div class="card-header">Tasks</div>
+                <table class="card-body table">
+                    <thead></thead>
+                    <tr>
+                        <th>ID</th><th>End date</th><th>Start date</th><th>Description</th><th>Name</th>
+                        <th>Assigned By</th><th>Assigned To</th>
+                    </tr>
+                    <tbody>
+                        <tr *ngFor="let task of tasks">
+                            <td>{{task.taskId}}</td>
+                            <td>{{task.startDate}}</td>
+                            <td>{{task.endDate}}</td>
+                            <td>{{task.taskDesc}}</td>
+                            <td>{{task.taskName}}</td>
+                            <td>{{task.assignedBy.f_name}} {{task.assignedBy.l_name}}</td>
+                            <td>{{task.assignedTo.f_name}} {{task.assignedTo.l_name}}</td>
+                            <td *ngIf="loginService.isAdmin()"><button class="btn btn-danger" (click)="deleteTask(task)">
+                                Delete Task</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                        </div>
+        </div>
+

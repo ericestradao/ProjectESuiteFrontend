@@ -1,0 +1,48 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Create Meeting'" [icon]="'fa-th-list'"></app-page-header>
+    <div class="col-xl-12 text-xs-center">
+        <form action="" [formGroup]="registerForm" action="" (ngSubmit)="registerForm.valid && onRegisterSubmit()" novalidate>
+            <div class="form-group" *ngIf="loginService.isAdmin()">
+                    <label for="empid">Employee</label>
+                <select [(ngModel)]="meeting.empid" name="empid" id="empid" class="form-control"
+                [ngModelOptions]="{standalone: true}">
+                <option selected="selected" disabled>Select employee...</option>
+                <option *ngFor="let emp of employees" [ngValue]="{'emailid':emp.emailid,'empid':emp.empid}">{{emp.f_name}} {{emp.l_name}}</option>
+    
+                </select>
+            </div>    
+            <div class="form-container">
+                    <label for="meetingDesc">Description</label>
+                    <mat-form-field>
+                    <input [(ngModel)]="meeting.meetingDesc" placeholder="Enter a reason" name="meetingDesc"
+                        id="meetingDesc" matInput formControlName="meetingDesc">
+                    </mat-form-field>
+                </div>      
+            <div class="form-group">
+                <label for="startTime">Start Time</label>
+                <input type="datetime-local" [(ngModel)]="meeting.startTime" placeholder="Enter start time" class="form-control" name="startTime"
+                    id="startTime" formControlName="startTime">
+            </div>
+    
+            <div class="form-group">
+                <label for="endTime">End Time</label>
+                <input type="datetime-local" [(ngModel)]="meeting.endTime" placeholder="Enter end time" class="form-control" name="endTime"
+                    id="endTime" formControlName="endTime">
+            </div>
+
+            <div class="form-group">
+                <label for="roomId">Meeting Room</label>
+            <select [(ngModel)]="meeting.roomId" name="roomId" id="roomId" class="form-control"
+            [ngModelOptions]="{standalone: true}">
+            <option selected="selected" disabled>Select room...</option>
+            <option *ngFor="let room of meetingRoom" [ngValue]="room.roomId">{{room.meetingRoomName}}</option>
+
+            </select>
+        </div> 
+            
+            <button class="mat-raised-button mat-primary" (click)="createMeeting()" [disabled]="!registerForm.valid"
+            mat-button type="submit">Create Meeting</button>
+            
+        </form>
+        </div>
+        </div>

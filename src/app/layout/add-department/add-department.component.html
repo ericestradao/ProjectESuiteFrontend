@@ -1,0 +1,18 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Create Department'" [icon]="'fa-edit'"></app-page-header>
+
+                <div class="co-md-6">
+                        <form action="" [formGroup]="registerForm" (ngSubmit)="registerForm.valid && onRegisterSubmit()" novalidate>
+                                <div class="form-container">
+                                <label for="deptname">Deparment Name</label>
+                                <mat-form-field>
+                                <input [(ngModel)]="dept.deptname" placeholder="Enter department name" name="deptname"
+                                    id="deptname" matInput formControlName="deptname">
+                                </mat-form-field>
+                            </div>
+                    
+                            <button class="mat-raised-button mat-primary" (click)="createDept()"  mat-button type="submit"
+                            [disabled]="!registerForm.valid">Create Department</button>
+                        </form>
+                    </div>
+                    </div>

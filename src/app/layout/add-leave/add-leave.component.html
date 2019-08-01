@@ -1,0 +1,49 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Create Request'" [icon]="'fa-wrench'"></app-page-header>
+
+    <div class="row">
+        <div class="col-xl-12 text-xs-center">
+            <form action="" [formGroup]="registerForm" action="" (ngSubmit)="registerForm.valid && onRegisterSubmit()" novalidate>
+    
+                    <div class="form-group" *ngIf="loginService.isAdmin()">
+                            <label for="empid">Select employee</label>
+                        <select [(ngModel)]="leave.empid" name="empid" id="empid" class="form-control"
+                        [ngModelOptions]="{standalone: true}">
+                        <option *ngFor="let emp of employees" [ngValue]="{'emailid':emp.emailid,'empid':emp.empid}">
+                            {{emp.f_name}} {{emp.l_name}}</option>
+            
+                        </select>
+                    </div>        
+                    <div class="form-container">
+                            <label for="reason">Reason</label>
+                            <mat-form-field>
+                            <input [(ngModel)]="leave.reason" placeholder="Enter a reason" class="form-control" name="reason"
+                                id="reason" matInput formControlName="reason">
+                            </mat-form-field>
+                        </div> 
+                    <div class="form-container">
+                            <label for="leaveType">Leave Type</label>
+                            <mat-form-field>
+                            <input [(ngModel)]="leave.leaveType" placeholder="Enter a leave type" class="form-control" name="leaveType"
+                                id="leaveType" matInput formControlName="leaveType">
+                            </mat-form-field>
+                        </div>       
+                    <div class="form-group">
+                        <label for="startDate">Start Date</label>
+                        <input type="date" [(ngModel)]="leave.startDate" placeholder="Enter start date" class="form-control" name="startDate"
+                            id="startDate" formControlName="startDate">
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="endDate">End Date</label>
+                        <input type="date" [(ngModel)]="leave.endDate" placeholder="Enter end date" class="form-control" name="endDate"
+                            id="endDate" formControlName="endDate">
+                    </div>
+                    
+                    <button class="mat-raised-button mat-primary" (click)="createLeave()" mat-button type="submit"
+                    [disabled]="!registerForm.valid" >Create Leave Request</button>
+                    
+                </form>
+    </div>
+    <!-- /.row -->
+</div>
