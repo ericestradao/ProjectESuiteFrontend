@@ -31,10 +31,54 @@
                         <label *ngIf="leave.approve=='no'"
                         class="fa fa-window-close fa-x5" style="color:red">&nbsp; Denied</label>
                     </td>
-                    <td *ngIf="loginService.isAdmin()">
-                            <button class="btn btn-danger" (click)="deleteLeaves(leave)">
+                    <td *ngIf="loginService.isAdmin()"><button class="btn btn-outline-secondary" (click)="getLeave(leave.leaveId); open(content);">Edit
+                            Request</button>
+                            &nbsp;
+                            <button class="btn btn-outline-dark" (click)="deleteLeaves(leave)">
                             Delete Request</button></td>
                 </tr>
             </tbody>
         </table>
+        </div>
+        <ng-template #content let-modal>
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">Leave Request update</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                       <div class="form-group">
+                            <label for="startDate">Start Date</label>
+                            <div class="input-group">
+                                <input type="date" [(ngModel)]="startDate" class="form-control" 
+                                     name="startDate">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                <label for="endDate">End Date</label>
+                                <div class="input-group">
+                                    <input type="date" [(ngModel)]="endDate" class="form-control"
+                                        name="endDate">
+                                </div>
+                            </div>
+                        <div class="form-group">
+                            <label for="leaveType">Leave Type</label>
+                            <div class="input-group">
+                                <input [(ngModel)]="leaveType" class="form-control" name="leaveType">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="reason">Reason</label>
+                            <div class="input-group">
+                                <input [(ngModel)]="reason" class="form-control" name="reason">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+                </div>
+            </ng-template>
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Department, Employee, HttpClientService } from '../service/http-client-service.service';
 import { routerTransition } from '../router.animations';
+import { RegistrationValidator } from '../shared/register.validator';
 
 
 @Component({
@@ -15,6 +16,7 @@ export class RegisterComponent implements OnInit {
   department:Department[];
   emp:Employee=new Employee(0,'','','','',0);
   registerForm: FormGroup;
+  passwordForm: FormGroup;
   hide = true;
   userTemp:string;
   
@@ -23,6 +25,14 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.httpClientService.getDept().subscribe(
       response=>this.handlesuccessfulResponse(response),);
+
+      this.passwordForm = this.formBuilder.group({
+        password: [this.emp.password, [Validators.required,
+        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
+        confirmPassword: ['', Validators.required]
+      }, {
+        validator: RegistrationValidator.validate.bind(this)
+      });
 
     this.registerForm = this.formBuilder.group({
       'f_name': [this.emp.f_name, [
@@ -35,13 +45,13 @@ export class RegisterComponent implements OnInit {
         Validators.required,
         Validators.email
       ]],
-      'password':[this.emp.password, [
-        Validators.required,
-        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
-      ]],
       'contacno': [this.emp.contacno, [
+        Validators.minLength(10)
+      ]],
+      'deptname': ['', [
         Validators.required
-      ]]
+      ]],
+      passwordForm: this.passwordForm
     });  
     }
 

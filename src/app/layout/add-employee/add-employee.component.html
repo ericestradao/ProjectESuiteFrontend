@@ -26,7 +26,7 @@
                     id="username" matInput formControlName="username">
                 </mat-form-field>
             </div>
-
+            <div [formGroup]="passwordForm">
             <div class="form-container">
                 <label for="password">Password</label>
                 <mat-form-field>
@@ -34,12 +34,21 @@
                     id="password" matInput formControlName="password">
                 </mat-form-field>
             </div>
-
             <div class="form-container">
+                <label for="password">Confirm Password</label>
+                <mat-form-field>
+                <input placeholder="Confirm Password" name="confirmPassword" type="password"
+                    id="confirmPassword" matInput formControlName="confirmPassword">
+                </mat-form-field>
+                </div>
+                <p class="alert alert-danger" *ngIf="passwordForm.errors?.doesMatchPassword">Password does not match</p>
+            </div>
+            <div class="form-container">
+
                 <label for="contacno">Contact Number</label>
                 <mat-form-field>
                 <input [(ngModel)]="emp.contacno" placeholder="Enter your contact number" name="contacno"
-                    id="contacno" matInput formControlName="contacno" value="">
+                    id="contacno" matInput formControlName="contacno" value=''>
                 </mat-form-field>
             </div>
             
@@ -47,7 +56,7 @@
                     <label for="deptname">Department</label>
       
                 <select [(ngModel)]="emp.deptname" name="deptname" id="deptname" class="form-control"
-                [ngModelOptions]="{standalone: true}">
+                formControlName="deptname">
                 <option selected="selected" disabled>Choose a department...</option>
                 <option *ngFor="let dept of department" [ngValue]="dept.deptname">{{dept.deptname}}</option>
     

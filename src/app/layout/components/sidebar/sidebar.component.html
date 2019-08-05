@@ -28,6 +28,16 @@
             <span>Departments</span>
         </a>
 
+        <a *ngIf="loginService.isAdmin()" [routerLink]="['/addMeetingRoom']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-object-group"></i>&nbsp;
+            <span>Meeting Rooms</span>
+        </a>
+        
+        <a *ngIf="loginService.isAdmin()" [routerLink]="['/addTrainingRoom']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-institution"></i>&nbsp;
+            <span>Training Rooms</span>
+        </a>
+
         <a *ngIf="!loginService.isAdmin()" [routerLink]="['/tasks']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-tasks"></i>&nbsp;
             <span>Tasks</span>

@@ -1,0 +1,110 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Create Trianing Room'" [icon]="'fa-edit'"></app-page-header>
+
+    <div class="co-md-6">
+        <form action="" [formGroup]="registerForm" (ngSubmit)="registerForm.valid && onRegisterSubmit()" novalidate>
+            <div class="form-container">
+                <label for="roomName">Room Name</label>
+                <mat-form-field>
+                    <input [(ngModel)]="room.roomName" placeholder="Enter room name" name="roomName" id="roomName"
+                        matInput formControlName="roomName">
+                </mat-form-field>
+            </div>
+            <div class="form-container">
+                <label for="roomCapacity">Capacity</label>
+                <mat-form-field>
+                    <input [(ngModel)]="room.roomCapacity" placeholder="Enter capacity" name="roomCapacity"
+                        id="roomCapacity" matInput formControlName="roomCapacity" value=''>
+                </mat-form-field>
+            </div>
+            <div class="form-container">
+                <label for="floorNb">Floor number</label>
+                <mat-form-field>
+                    <input [(ngModel)]="room.floorNb" placeholder="Enter floor number" name="floorNb" id="floorNb"
+                        matInput formControlName="floorNb" value=''>
+                </mat-form-field>
+            </div>
+            <div class="form-container">
+                <label for="isProjector">Projector</label>
+                <mat-form-field>
+                    <input [(ngModel)]="room.isProjector" name="isProjector" id="isProjector"
+                        matInput formControlName="isProjector">
+                </mat-form-field>
+            </div>
+            <div class="form-container">
+                <label for="isWhiteboard">Whiteboard</label>
+                <mat-form-field>
+                    <input [(ngModel)]="room.isWhiteboard" name="isWhiteboard" id="isWhiteboard"
+                        matInput formControlName="isWhiteboard">
+                </mat-form-field>
+            </div>
+            <button class="mat-raised-button mat-primary" (click)="createRoom()" mat-button type="submit"
+                [disabled]="!registerForm.valid">Create Room</button>
+        </form>
+    </div>
+    <br><br>
+    <div class="card mb-6">
+        <div class="card-header">Rooms List</div>
+        <table class="card-body table">
+            <thead></thead>
+            <tr>
+                <th>ID</th>
+                <th>Room Name</th>
+                <th>Capacity</th>
+                <th>Floor</th>
+                <th>Projector</th>
+                <th>Whiteboard</th>
+            </tr>
+            <tbody>
+                <tr *ngFor="let room of trainingRoom">
+                    <td scope="row">{{room.roomId}}</td>
+                    <td>{{room.roomName}}</td>
+                    <td>{{room.roomCapacity}}</td>
+                    <td>{{room.floorNb}}</td>
+                    <td>{{room.isProjector}}</td>
+                    <td>{{room.isWhiteboard}}</td>
+                    <td>
+                        <button class="btn btn-outline-secondary"
+                        (click)="getTRoom(room.roomId); open(content);">Edit Room</button>
+                        &nbsp;
+                    <button class="btn btn-outline-dark" (click)="deleteTRoom(room)">Delete Room</button>
+                    
+                </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <ng-template #content let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Training room update</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form action="">
+                <div class="form-group">
+                    <label for="roomName">Room Name</label>
+                    <div class="input-group">
+                        <input [(ngModel)]="roomName" class="form-control" name="roomName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="roomCapacity">Capacity</label>
+                    <div class="input-group">
+                        <input [(ngModel)]="roomCapacity" class="form-control" name="roomCapacity">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="floorNb">Floor</label>
+                    <div class="input-group">
+                        <input [(ngModel)]="floorNb" class="form-control" name="floorNb">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+        </div>
+    </ng-template>
+</div>

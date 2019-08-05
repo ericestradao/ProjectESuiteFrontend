@@ -83,6 +83,67 @@ export class HttpClientService {
     return this.httpClient.get<Employee>('http://localhost:8080/Admin/employees')
   }
 
+  public getUser(employee){
+    return this.httpClient.get<Employee>('http://localhost:8080/Admin/employee/'+employee)
+  }
+  public getLeave(leave){
+    return this.httpClient.get<Leaves>('http://localhost:8080/Admin/leaveRequest/'+leave)
+  }
+  public getTask(task){
+    return this.httpClient.get<Tasks>('http://localhost:8080/Admin/task/'+task)
+  }
+  public getMeeting(meeting){
+    return this.httpClient.get<Meetings>('http://localhost:8080/Admin/meeting/'+meeting)
+  }
+  public getTraining(training){
+    return this.httpClient.get<Trainings>('http://localhost:8080/Admin/training/'+training)
+  }
+  public getDep(department){
+    return this.httpClient.get<Department>('http://localhost:8080/Admin/department/'+department)
+  }
+  public getMRoom(meetingRoom){
+    return this.httpClient.get<MeetingRoom>('http://localhost:8080/Admin/meetingRoom/'+meetingRoom)
+  }
+  public getTRoom(trainingRoom){
+    return this.httpClient.get<TrainingRoom>('http://localhost:8080/Admin/trainingRoom/'+trainingRoom)
+  }
+
+  public updateEmp(employee){
+    return this.httpClient.put<Employee>('http://localhost:8080/Admin/updateEmployee/'+employee.empid,
+    {"f_name": employee.f_name,
+    "l_name": employee.l_name,
+    "emailid": employee.emailid,
+    "contacno": employee.contacno})
+  }
+  public updateTask(task){
+    return this.httpClient.put<Tasks>('http://localhost:8080/Admin/updateTask/'+task.taskId,
+    {"taskName":task.taskName,"taskDesc":task.taskDesc,"startDate":task.startDate,"endDate":task.endDate})
+  }
+  public updateLeave(leave){
+    return this.httpClient.put<Leaves>('http://localhost:8080/Admin/updateRequest/'+leave.leaveId,
+    {"reason":leave.reason,"leaveType":leave.leaveType,"startDate":leave.startDate,"endDate":leave.endDate})
+  }
+  public updateMeeting(meeting){
+    return this.httpClient.put<Meetings>('http://localhost:8080/Admin/updateMeeting/'+meeting.requestId,
+    {"meetingDesc":meeting.meetingDesc,"startTime":meeting.startTime,"endTime":meeting.endTime})
+  } 
+  public updateTraining(training){
+    return this.httpClient.put<Trainings>('http://localhost:8080/Admin/updateTraining/'+training.requestId,
+    {"trainingDesc":training.trainingDesc,"startDate":training.startDate,"endDate":training.endDate})
+  }
+  public updateDepartment(department){
+    return this.httpClient.put<Trainings>('http://localhost:8080/Admin/updateDepartment/'+department.dept_id,
+    {"dept_id":department.dept_id,"deptname":department.deptname})
+  }
+  public updateMRoom(meetingRoom){
+    return this.httpClient.put<MeetingRoom>('http://localhost:8080/Admin/updateMeetingRoom/'+meetingRoom.roomId,
+    {"capacity":meetingRoom.capacity,"meetingRoomName":meetingRoom.meetingRoomName,"floor":meetingRoom.floor})
+  }
+  public updateTRoom(trainingRoom){
+    return this.httpClient.put<TrainingRoom>('http://localhost:8080/Admin/updateTrainingRoom/'+trainingRoom.roomId,
+    {"roomCapacity":trainingRoom.roomCapacity,"roomName":trainingRoom.roomName,"floorNb":trainingRoom.floorNb})
+  }
+
   public getDept(){
     return this.httpClient.get<Department[]>('http://localhost:8080/Admin/departments')
   }
@@ -117,6 +178,14 @@ export class HttpClientService {
 
   public createDept(department){
     return this.httpClient.post<Department>('http://localhost:8080/Admin/newDepartment/',department)
+  }
+
+  public createMeetingRoom(meetingRoom){
+    return this.httpClient.post<MeetingRoom>('http://localhost:8080/Admin/newMeetingRoom/',meetingRoom)
+  }
+
+  public createTrainingRoom(trainingRoom){
+    return this.httpClient.post<TrainingRoom>('http://localhost:8080/Admin/newTrainingRoom/',trainingRoom)
   }
   
   public createTask(tasks){
@@ -158,6 +227,18 @@ export class HttpClientService {
 
   public deleteTrainings(training){
     return this.httpClient.delete<Trainings>('http://localhost:8080/Admin/training/'+training.requestId)
+  }
+
+  public deleteDepartment(department){
+    return this.httpClient.delete<Department>('http://localhost:8080/Admin/department/'+department.dept_id)
+  }
+
+  public deleteMRoom(meetingRoom){
+    return this.httpClient.delete<MeetingRoom>('http://localhost:8080/Admin/meetingRoom/'+meetingRoom.roomId)
+  }
+
+  public deleteTRoom(trainingRoom){
+    return this.httpClient.delete<TrainingRoom>('http://localhost:8080/Admin/trainingRoom/'+trainingRoom.roomId)
   }
 
 

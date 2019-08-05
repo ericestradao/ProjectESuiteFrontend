@@ -37,7 +37,10 @@ export class AddTrainingComponent implements OnInit {
             ]],
             'endDate': [this.training.endDate, [
               Validators.required
-            ]]
+            ]],
+            'roomId': ['', [
+              Validators.required
+            ]],
           });
         }
         handlesuccessfulResponseEmp(response){

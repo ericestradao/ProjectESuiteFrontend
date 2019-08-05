@@ -20,6 +20,8 @@ const routes: Routes = [
             { path: 'trainings', loadChildren: () => import('./trainings/trainings.module').then(m => m.TrainingsModule) },
             { path: 'addTraining', loadChildren: () => import('./add-training/add-training.module').then(m => m.AddTrainingModule) },
             { path: 'addDepartment', loadChildren: () => import('./add-department/add-department.module').then(m => m.AddDepartmentModule) },
+            { path: 'addMeetingRoom', loadChildren: () => import('./add-meeting-room/add-meeting-room.module').then(m => m.AddMeetingRoomModule) },
+            { path: 'addTrainingRoom', loadChildren: () => import('./add-training-room/add-training-room.module').then(m => m.AddTrainingRoomModule) },
             
         ]
     }

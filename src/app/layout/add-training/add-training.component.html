@@ -33,7 +33,7 @@
                 <div class="form-group">
                     <label for="roomId">Training Room</label>
                     <select [(ngModel)]="training.roomId" name="roomId" id="roomId" class="form-control"
-                    [ngModelOptions]="{standalone: true}">
+                    formControlName="roomId">
                     <option selected="selected" disabled>Select room...</option>
                     <option *ngFor="let room of trainingRoom" [ngValue]="room.roomId">{{room.roomName}}</option>
         

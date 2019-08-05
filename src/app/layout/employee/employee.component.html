@@ -1,23 +1,71 @@
 <div [@routerTransition]>
-        <app-page-header [heading]="'Employees List'" [icon]="'fa-fa users'"></app-page-header>
-            <div class="card mb-6" *ngIf="loginService.isAdmin()">
-                    <div class="card-header">Employees</div>
-    <table class="card-body table">
-        <thead></thead>
-        <tr>
-            <th>ID</th><th>Full Name</th><th>Email</th><th>Contact</th><th>Department</th>
-        </tr>
-        <tbody>
-            <tr *ngFor="let emp of employees">
-                <td scope="row">{{emp.empid}}</td>
-                <td>{{emp.f_name}} {{emp.l_name}}</td>
-                <td>{{emp.emailid}}</td>
-                <td>{{emp.contacno}}</td>
-                <td>{{emp.dept_id.deptname}}</td>
-                <td *ngIf="loginService.isAdmin()"><button class="btn btn-danger" (click)="deleteEmp(emp)">
-                    Delete Employee</button></td>
+    <app-page-header [heading]="'Employees List'" [icon]="'fa-fa users'"></app-page-header>
+    <div class="card mb-6" *ngIf="loginService.isAdmin()">
+        <div class="card-header">Employees</div>
+        <table class="card-body table">
+            <thead></thead>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Department</th>
             </tr>
-        </tbody>
-    </table>
+            <tbody>
+                <tr *ngFor="let emp of employees">
+                    <td scope="row">{{emp.empid}}</td>
+                    <td>{{emp.f_name}} {{emp.l_name}}</td>
+                    <td>{{emp.emailid}}</td>
+                    <td>{{emp.contacno}}</td>
+                    <td>{{emp.dept_id.deptname}}</td>
+                    <td *ngIf="loginService.isAdmin()">
+                            <button class="btn btn-outline-secondary"
+                            (click)="getUser(emp.emailid); open(content);">Edit Employee</button>
+                            &nbsp;
+                        <button class="btn btn-outline-dark" (click)="deleteEmp(emp)">Delete Employee</button>
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+    <ng-template #content let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Employee update</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form action="">
+                <div class="form-group">
+                    <label for="f_name">First Name</label>
+                    <div class="input-group">
+                        <input [(ngModel)]="f_name" class="form-control" name="f_name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="l_name">Last Name</label>
+                    <div class="input-group">
+                        <input [(ngModel)]="l_name" class="form-control" name="l_name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="emailid">Email</label>
+                    <div class="input-group">
+                        <input [(ngModel)]="email" class="form-control" name="emailid">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="contacno">Contact</label>
+                    <div class="input-group">
+                        <input [(ngModel)]="contacno" type="number" class="form-control" name="contacno" >
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+        </div>
+    </ng-template>
 </div>

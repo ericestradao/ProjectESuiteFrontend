@@ -1,0 +1,94 @@
+<div [@routerTransition]>
+                <app-page-header [heading]="'Create Meeting Room'" [icon]="'fa-edit'"></app-page-header>
+
+    <div class="co-md-6">
+        <form action="" [formGroup]="registerForm" (ngSubmit)="registerForm.valid && onRegisterSubmit()" novalidate>
+            <div class="form-container">
+                <label for="meetingRoomName">Room Name</label>
+                <mat-form-field>
+                    <input [(ngModel)]="room.meetingRoomName" placeholder="Enter room name" name="meetingRoomName"
+                        id="meetingRoomName" matInput formControlName="meetingRoomName">
+                </mat-form-field>
+            </div>
+            <div class="form-container">
+                <label for="capacity">Capacity</label>
+                <mat-form-field>
+                    <input [(ngModel)]="room.capacity" placeholder="Enter capacity" name="capacity"
+                        id="capacity" matInput formControlName="capacity" value=''>
+                </mat-form-field>
+            </div>
+            <div class="form-container">
+                <label for="floor">Floor number</label>
+                <mat-form-field>
+                    <input [(ngModel)]="room.floor" placeholder="Enter floor number" name="floor"
+                        id="floor" matInput formControlName="floor" value=''>
+                </mat-form-field>
+            </div>
+
+            <button class="mat-raised-button mat-primary" (click)="createRoom()" mat-button type="submit"
+                [disabled]="!registerForm.valid">Create Room</button>
+        </form>
+    </div>
+    <br><br>
+    <div class="card mb-6">
+        <div class="card-header">Rooms List</div>
+        <table class="card-body table">
+            <thead></thead>
+            <tr>
+                <th>ID</th>
+                <th>Room Name</th>
+                <th>Capacity</th>
+                <th>Floor</th>
+
+            </tr>
+            <tbody>
+                <tr *ngFor="let room of meetingRoom">
+                    <td scope="row">{{room.roomId}}</td>
+                    <td>{{room.meetingRoomName}}</td>
+                    <td>{{room.capacity}}</td>
+                    <td>{{room.floor}}</td>
+                    <td>
+                        <button class="btn btn-outline-secondary"
+                        (click)="getMRoom(room.roomId); open(content);">Edit Room</button>
+                        &nbsp;
+                    <button class="btn btn-outline-dark" (click)="deleteMRoom(room)">Delete Room</button>
+                    
+                </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <ng-template #content let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Meeting room update</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form action="">
+                <div class="form-group">
+                    <label for="meetingRoomName">Room Name</label>
+                    <div class="input-group">
+                        <input [(ngModel)]="meetingRoomName" class="form-control" name="meetingRoomName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="capacity">Capacity</label>
+                    <div class="input-group">
+                        <input [(ngModel)]="capacity" class="form-control" name="capacity">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="floor">Floor</label>
+                    <div class="input-group">
+                        <input [(ngModel)]="floor" class="form-control" name="floor">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+        </div>
+    </ng-template>
+</div>

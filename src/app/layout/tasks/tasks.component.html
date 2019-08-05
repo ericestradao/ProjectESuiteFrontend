@@ -1,29 +1,79 @@
 <div [@routerTransition]>
     <app-page-header [heading]="'Tasks List'" [icon]="'fa-table'"></app-page-header>
 
-                
-            <div class="card mb-6">
-                <div class="card-header">Tasks</div>
-                <table class="card-body table">
-                    <thead></thead>
-                    <tr>
-                        <th>ID</th><th>End date</th><th>Start date</th><th>Description</th><th>Name</th>
-                        <th>Assigned By</th><th>Assigned To</th>
-                    </tr>
-                    <tbody>
-                        <tr *ngFor="let task of tasks">
-                            <td>{{task.taskId}}</td>
-                            <td>{{task.startDate}}</td>
-                            <td>{{task.endDate}}</td>
-                            <td>{{task.taskDesc}}</td>
-                            <td>{{task.taskName}}</td>
-                            <td>{{task.assignedBy.f_name}} {{task.assignedBy.l_name}}</td>
-                            <td>{{task.assignedTo.f_name}} {{task.assignedTo.l_name}}</td>
-                            <td *ngIf="loginService.isAdmin()"><button class="btn btn-danger" (click)="deleteTask(task)">
-                                Delete Task</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-                        </div>
-        </div>
 
+    <div class="card mb-6">
+        <div class="card-header">Tasks</div>
+        <table class="card-body table">
+            <thead></thead>
+            <tr>
+                <th>ID</th>
+                <th>End date</th>
+                <th>Start date</th>
+                <th>Description</th>
+                <th>Name</th>
+                <th>Assigned By</th>
+                <th>Assigned To</th>
+            </tr>
+            <tbody>
+                <tr *ngFor="let task of tasks">
+                    <td>{{task.taskId}}</td>
+                    <td>{{task.startDate}}</td>
+                    <td>{{task.endDate}}</td>
+                    <td>{{task.taskDesc}}</td>
+                    <td>{{task.taskName}}</td>
+                    <td>{{task.assignedBy.f_name}} {{task.assignedBy.l_name}}</td>
+                    <td>{{task.assignedTo.f_name}} {{task.assignedTo.l_name}}</td>
+                    <td *ngIf="loginService.isAdmin()">
+                        <button class="btn btn-outline-secondary" (click)="getTask(task.taskId); open(content);">Edit
+                            Task</button>
+                        &nbsp;
+                        <button class="btn btn-outline-dark" (click)="deleteTask(task)">
+                            Delete Task</button>
+                        </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <ng-template #content let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Task update</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="">
+                   <div class="form-group">
+                        <label for="startDate">Start Date</label>
+                        <div class="input-group">
+                            <input type="date" [(ngModel)]="startDate" class="form-control" 
+                                 name="startDate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <label for="endDate">End Date</label>
+                            <div class="input-group">
+                                <input type="date" [(ngModel)]="endDate" class="form-control"
+                                    name="endDate">
+                            </div>
+                        </div>
+                    <div class="form-group">
+                        <label for="taskName">Task Name</label>
+                        <div class="input-group">
+                            <input [(ngModel)]="taskName" class="form-control" name="taskName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskDesc">Task Description</label>
+                        <div class="input-group">
+                            <input [(ngModel)]="taskDesc" class="form-control" name="taskDesc">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+            </div>
+        </ng-template>
+</div>

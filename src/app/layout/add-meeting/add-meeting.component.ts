@@ -36,7 +36,10 @@ export class AddMeetingComponent implements OnInit {
           ]],
           'endTime': [this.meeting.endTime, [
             Validators.required
-          ]]
+          ]],
+          'roomId': ['', [
+            Validators.required
+          ]],
         });
     }
   

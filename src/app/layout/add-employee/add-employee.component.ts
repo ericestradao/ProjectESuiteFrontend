@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { Employee, Department, HttpClientService } from 'src/app/service/http-client-service.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { RegistrationValidator } from '../../shared/register.validator';
 
 @Component({
     selector: 'app-add-employee',
@@ -14,6 +15,7 @@ export class AddEmployeeComponent implements OnInit {
     department:Department[];
     emp:Employee=new Employee(0,'','','','',0);
     registerForm: FormGroup;
+    passwordForm: FormGroup;
     hide = true;
 
     constructor(private httpClientService:HttpClientService, private formBuilder : FormBuilder) {}
@@ -21,7 +23,15 @@ export class AddEmployeeComponent implements OnInit {
     ngOnInit() {
         this.httpClientService.getDept().subscribe(
             response=>this.handlesuccessfulResponse(response),);
-      
+          
+            this.passwordForm = this.formBuilder.group({
+              password: [this.emp.password, [Validators.required,
+              Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
+              confirmPassword: ['', Validators.required]
+            }, {
+              validator: RegistrationValidator.validate.bind(this)
+            });
+
           this.registerForm = this.formBuilder.group({
             'f_name': [this.emp.f_name, [
               Validators.required
@@ -33,13 +43,13 @@ export class AddEmployeeComponent implements OnInit {
               Validators.required,
               Validators.email
             ]],
-            'password':[this.emp.password, [
-              Validators.required,
-              Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
-            ]],
             'contacno': [this.emp.contacno, [
+              Validators.minLength(10)
+            ]],
+            'deptname': ['', [
               Validators.required
-            ]]
+            ]],
+            passwordForm: this.passwordForm
           });
           }
       
@@ -62,7 +72,7 @@ export class AddEmployeeComponent implements OnInit {
       
         onRegisterSubmit() {
           alert("Employee registered");
-          window.location.reload();
+          window.location.replace("/employee");
         }
       
 }

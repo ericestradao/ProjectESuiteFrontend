@@ -8,6 +8,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { AddMeetingRoomComponent } from './add-meeting-room/add-meeting-room.component';
+import { AddTrainingRoomComponent } from './add-training-room/add-training-room.component';
 
 @NgModule({
     imports: [

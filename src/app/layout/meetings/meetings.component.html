@@ -1,4 +1,4 @@
-<div>
+<div [@routerTransition]>
     <app-page-header [heading]="'Meetings'" [icon]="'fa-th-list'"></app-page-header>
     <div class="card mb-6">
         <div class="card-header">Meetings</div>
@@ -28,9 +28,49 @@
                     <label *ngIf="meeting.approve=='no'"
                     class="fa fa-window-close fa-x5" style="color:red">&nbsp; Denied</label>
                 </td>
-                <td *ngIf="loginService.isAdmin()"><button class="btn btn-danger" (click)="deleteMeetings(meeting)">
+                <td *ngIf="loginService.isAdmin()">
+                        <button class="btn btn-outline-secondary" (click)="getMeeting(meeting.requestId); open(content);">Edit
+                                Meeting</button>
+                            &nbsp;
+                    <button class="btn btn-outline-dark" (click)="deleteMeetings(meeting)">
                     Delete Meeting</button></td>
             </tr>
         </tbody>
     </table>
+    </div>
+    <ng-template #content let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Meeting update</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="">
+                   <div class="form-group">
+                        <label for="startTime">Start Time</label>
+                        <div class="input-group">
+                            <input type="datetime" [(ngModel)]="startTime" class="form-control" 
+                                 name="startTime">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <label for="endTime">End Time</label>
+                            <div class="input-group">
+                                <input type="datetime" [(ngModel)]="endTime" class="form-control"
+                                    name="endTime">
+                            </div>
+                        </div>
+                    <div class="form-group">
+                        <label for="meetingDesc">Meeting Description</label>
+                        <div class="input-group">
+                            <input [(ngModel)]="meetingDesc" class="form-control" name="meetingDesc">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+            </div>
+        </ng-template>
 </div>

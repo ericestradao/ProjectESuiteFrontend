@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbCarouselModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatButtonModule, MatCardModule, MatMenuModule, MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule } from '@angular/material';
 import { EmployeeRoutingModule } from './employee-routing.module';
+import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EmployeeComponent } from './employee.component';
 import { PageHeaderModule } from '../../shared';
 import {
@@ -13,6 +14,7 @@ import {
     ChatComponent
 } from './components';
 import { StatModule } from '../../shared';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -29,7 +31,10 @@ import { StatModule } from '../../shared';
         MatIconModule,
         MatSidenavModule,
         MatListModule,
-        PageHeaderModule
+        PageHeaderModule,
+        NgbModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
     declarations: [
         EmployeeComponent,
